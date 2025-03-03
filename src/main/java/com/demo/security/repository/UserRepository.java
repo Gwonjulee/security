@@ -23,6 +23,7 @@ public class UserRepository{
         return userJpaRepository.findByUsername(username).isPresent();
     }
 
+    @Transactional
     public UserDto createUser(CreateUserDto createUserDto) {
         UserEntity userEntity = userJpaRepository.save(UserEntity.newUser(createUserDto));
         AuthorityEntity authorityEntity = authorityJpaRepository.save(new AuthorityEntity("READ", userEntity));
@@ -31,6 +32,7 @@ public class UserRepository{
         return userEntity.toUser();
     }
 
+    @Transactional(readOnly = true)
     public UserDto getUserByUsername(String username) {
         return userJpaRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username))
