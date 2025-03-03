@@ -20,15 +20,17 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.formLogin(a -> a.defaultSuccessUrl("/main", true)); // 화면 로그인 허용
+//        http.formLogin(a -> a.defaultSuccessUrl("/main", true)); // 화면 로그인 허용
+        http.csrf().disable();
         http.authorizeHttpRequests(a -> a.anyRequest().authenticated());
+        http.formLogin().disable();
         return http.build();
     }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return web -> {
-            web.ignoring().requestMatchers("/api/vi/**"); // 임시 허용
+            web.ignoring().requestMatchers("/api/v1/**"); // 임시 허용
         };
     }
 }
