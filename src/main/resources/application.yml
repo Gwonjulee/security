@@ -1,0 +1,22 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: security
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      format-sql: true
+      dialect: .org.hibernate.dialect.MySQL8Dialect
+      hibernate.format_sql: true
+      hibernate.default_batch_fetch_size: 100
+    defer-datasource-initialization: true
+    open-in-view: false
+  datasource:
+    url: jdbc:mysql://localhost:3308/spring
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root1234!!
